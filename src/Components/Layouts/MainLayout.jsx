@@ -7,9 +7,9 @@ function MainLayout() {
   return (
     <div>
       <Navbar />
-      <div className="min-h-[80vh]">
-        <Outlet />
-      </div>
+        <div className="min-h-[80vh]">
+          <Outlet />
+        </div>
       <Footer />
     </div>
   );

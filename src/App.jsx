@@ -1,46 +1,42 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import AboutPage from "./Components/Pages/AboutPage";
-import ContactPage from "./Components/Pages/ContactPage";
 import HomePage from "./Components/Pages/HomePage";
-import NotFoundPage from "./Components/Pages/NotFoundPage";
 import MainLayout from "./Components/Layouts/MainLayout";
-import ServicesPage from "./Components/Pages/ServicesPage";
-import AuthLayout from "./Components/Layouts/AuthLayout";
-import Login from "./Components/Pages/Login";
-import SignUp from "./Components/Pages/SignUp";
-import Dashboard from "./Components/Pages/Dashboard";
 import ProtectedRoutes from "./Components/ProtectedRoutes";
-import UnAuthorized from "./Components/Pages/UnAuthorized";
+import MedicinesPage from "./Components/Pages/MedicinesPage";
+import VitaminsPage from "./Components/Pages/VitaminsPage";
+import MedicalEquipmentPage from "./Components/Pages/MedicalEquipmentPage";
+import FirstAidPage from "./Components/Pages/FirstAidPage";
+import PersonalPage from "./Components/Pages/PersonalPage";
+import BabyCarePage from "./Components/Pages/BabyCarePage";
+import AuthLayout from "./Components/Layouts/AuthLayout";
+import Login from './Components/Pages/Login';
+import SignUp from './Components/Pages/SignUp';
+import AllCategories from "./Components/Pages/AllCategories";
+import ProductDetailPage from "./Components/Pages/ProductDetailPage";
 
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/about", element: <AboutPage /> },
-      { path: "/contact", element: <ContactPage /> },
+      { path: "/medicines", element: <MedicinesPage /> },
+      { path: "/vitamins", element: <VitaminsPage /> },
+      { path: "/medicalequipment", element: <MedicalEquipmentPage /> },
+      { path: "/firstaid", element: <FirstAidPage /> },
+      { path: "/personalcare", element: <PersonalPage /> },
+      { path: "/babycare", element: <BabyCarePage /> },
+      { path: "/allcategories", element: <AllCategories /> },
+      { path: "/:type/:id", element: <ProductDetailPage /> },
+    ],
+  },
+  // {
+  //   element: <AuthLayout />,
+  //   children: [
+  //     { path: "/login", element: <Login /> },
+  //     { path: "/signup", element: <SignUp /> },
+  //   ],
+  // },
 
-      {
-        element: <ProtectedRoutes role="admin" />,
-        children: [{ path: "/dashboard", element: <Dashboard /> }],
-      },
-      {
-        element: <ProtectedRoutes />,
-        children: [{ path: "/services", element: <ServicesPage /> }],
-      },
-    ],
-  },
-  {
-    element: <AuthLayout />,
-    children: [
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <SignUp /> },
-    ],
-  },
-  {
-    path: "/unauthorized",
-    element: <UnAuthorized />,
-  },
 ]);
 
 function App() {
