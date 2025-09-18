@@ -133,6 +133,7 @@ import { IoCallOutline, IoPersonOutline, IoMenu, IoClose } from 'react-icons/io5
 import { MdOutlineMail } from 'react-icons/md';
 import { GrCart } from 'react-icons/gr';
 import { CiSearch } from 'react-icons/ci';
+import CartIcon from './../UI/CartIcon';
 
 // Assuming Container is a component that provides a consistent max-width and padding
 const Container = ({ children, className }) => (
@@ -202,9 +203,7 @@ const Header = () => {
             <div className="text-lg cursor-pointer hover:text-blue-600 transition-colors">
               <IoPersonOutline />
             </div>
-            <div className="text-lg cursor-pointer hover:text-blue-600 transition-colors">
-              <GrCart />
-            </div>
+            <CartIcon />
             <button className="lg:hidden text-2xl transition-all duration-300 z-50" onClick={toggleMenu}>
               {isMenuOpen ? <IoClose /> : <IoMenu />}
             </button>

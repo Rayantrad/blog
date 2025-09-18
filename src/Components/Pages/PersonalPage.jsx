@@ -1,13 +1,13 @@
 
 import React from 'react'
 import HeroSection from "../Layouts/HeroSection";
-import UseFetchData from "../../Utils/UseFetchData";
+import useFetchData from '../../utils/UseFetchData'; 
 import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 
 function PersonalPage() {
-  
-  const personalcare = UseFetchData('/personalcare');
+
+  const personalcare = useFetchData('/personalcare');
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="bg-gray-50 mb-10">
@@ -18,4 +18,4 @@ function PersonalPage() {
   )
 }
 
-export default PersonalPage;
+export default PersonalPage

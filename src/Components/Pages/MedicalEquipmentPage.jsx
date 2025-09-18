@@ -1,11 +1,11 @@
 import React from 'react'
 import HeroSection from "../Layouts/HeroSection";
-import UseFetchData from "../../Utils/UseFetchData";
+import useFetchData from '../../utils/UseFetchData';
 import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 
 function MedicalEquipmentPage() {
-  const medicalEquipment = UseFetchData('/medicalequipment');
+  const medicalEquipment = useFetchData('/medicalequipment');
   const [searchTerm, setSearchTerm] = useState("");
 
   return (

@@ -1,12 +1,12 @@
 import React from 'react'
 import HeroSection from "../Layouts/HeroSection";
-import UseFetchData from "../../Utils/UseFetchData";
+import useFetchData from "../../utils/UseFetchData";
 import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 
 function FirstAidPage() {
 
-  const firstaid = UseFetchData('/firstaid');
+  const firstaid = useFetchData('/firstaid');
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
