@@ -27,14 +27,13 @@
 // export default HeroSection;
 
 import React from 'react';
-import SearchBar from '../UI/SearchBar';
 
-function HeroSection({ title, onSearch }) {
+function HeroSection() {
 
   return (
     <div>
       <section
-        className="relative w-full h-[70vh] sm:h-[60vh] flex items-center justify-center bg-cover bg-center mb-10"
+        className="relative w-full h-[70vh] sm:h-[55vh] flex items-center justify-center bg-cover bg-center "
         style={{
           backgroundImage: "url('/Pharm.jpeg')",
         }}
@@ -51,16 +50,8 @@ function HeroSection({ title, onSearch }) {
             Discover carefully selected medicines, curated for your health, safety, and comfort — always backed by quality.
           </p>
 
-          <SearchBar onSearch={onSearch} />
-
         </div>
       </section>
-      <div className='my-10'>
-        <h1 className="text-3xl text-center sm:text-4xl font-serif font-semibold text-blue-800 tracking-wide">
-          {title}
-        </h1>
-
-      </div>
     </div>
   );
 }

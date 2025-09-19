@@ -14,6 +14,7 @@ import SignUp from './Components/Pages/SignUp';
 import AllCategories from "./Components/Pages/AllCategories";
 import ProductDetailPage from "./Components/Pages/ProductDetailPage";
 import CartPage from "./Components/Pages/CartPage";
+import CheckOutPage from "./Components/Pages/CheckOutPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "/allcategories", element: <AllCategories /> },
       { path: "/:type/:id", element: <ProductDetailPage /> },
       { path: "/cart", element: <CartPage /> },
+      { path: "/checkout", element: <CheckOutPage /> },
     ],
   },
   // {

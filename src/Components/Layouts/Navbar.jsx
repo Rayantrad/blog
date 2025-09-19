@@ -127,20 +127,15 @@
 // }
 
 // export default Navbar;
+
+
+
 import React, { useState } from 'react';
 import { NavLink } from 'react-router';
 import { IoCallOutline, IoPersonOutline, IoMenu, IoClose } from 'react-icons/io5';
 import { MdOutlineMail } from 'react-icons/md';
-import { GrCart } from 'react-icons/gr';
-import { CiSearch } from 'react-icons/ci';
 import CartIcon from './../UI/CartIcon';
-
-// Assuming Container is a component that provides a consistent max-width and padding
-const Container = ({ children, className }) => (
-  <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}>
-    {children}
-  </div>
-);
+import { MdFavoriteBorder } from "react-icons/md";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -152,27 +147,27 @@ const Header = () => {
   return (
     <div className='sticky top-0 z-50 bg-white'>
       {/* Top Bar - Free shipping message hidden on small screens */}
-      <div className="bg-black text-white py-2">
-        <Container className="flex justify-between items-center">
-          <div className="flex justify-between gap-5">
+      <div className=" bg-black text-white py-1 ">
+        <div className="container mx-auto flex justify-between items-center xs:px-1 sm:px-4 px-1">
+          <div className="flex w-3xl justify-between lg:justify-start sm:gap-5 items-center">
             <div className="flex items-center gap-1">
               <IoCallOutline />
-              <span className="text-xs">+1-202-555-0</span>
+              <span className="text-xs">+1-202-555-0256</span>
             </div>
             <div className="flex items-center gap-1">
               <MdOutlineMail />
               <span className="text-xs">support@carepharma.com</span>
             </div>
           </div>
-          <div className="hidden sm:block"> {/* This div is hidden on small screens */}
+          <div className="hidden  justify-end lg:block"> {/* This div is hidden on small screens */}
             <span className="text-xs">Free shipping on orders over $50!</span>
           </div>
-        </Container>
+        </div>
       </div>
 
       {/* Main Header */}
-      <Container>
-        <div className="my-4 flex justify-between items-center relative">
+      <div className='container mx-auto xs:px-1 sm:px-4 px-1'>
+        <div className="my-2 flex justify-between items-center relative">
           {/* Logo and Name */}
           <div className="flex items-center">
             <NavLink to="/">
@@ -186,85 +181,84 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Search Bar (Hidden on mobile) */}
-          <div className="hidden lg:flex justify-between items-center w-full max-w-xl px-5 h-9 bg-gray-100 rounded shadow-sm">
-            <CiSearch className="text-gray-400 text-l mr-2" />
-            <input
-              type="text"
-              onChange={(e) => handleLiveSearch(e.target.value)}
+          <div className="hidden lg:flex gap-6 justify-center">
 
-              placeholder="Search medicines, vitamins, medical equipment..."
-              className="flex-1 bg-transparent placeholder:text-sm placeholder-gray-400 focus:outline-none"
-            />
+            {/* Desktop Navigation Links */}
+
+
+            <div className="hidden xl:block">
+              <div>
+                <div className="flex gap-6 justify-center m-4">
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600  font-bold underline" : "text-black"}`}
+                    to="/allcategories"
+                  >
+                    All Products
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600  font-bold underline" : "text-black"}`}
+                    to="/medicines"
+                  >
+                    Medicines
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
+                    to="/vitamins"
+                  >
+                    Vitamins
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
+                    to="/medicalequipment"
+                  >
+                    Medical Equipment
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
+                    to="/firstaid"
+                  >
+                    First Aid
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
+                    to="/personalcare"
+                  >
+                    Personal Care
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) => `text-sm font-medium hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
+                    to="/babycare"
+                  >
+                    Baby Care
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+
+
           </div>
 
           {/* Icons and Burger Menu Button */}
-          <div className="flex items-center gap-5">
+
+          {/* Icons and Burger Menu Button */}
+          <div className="flex items-center gap-4">
             <div className="text-lg cursor-pointer hover:text-blue-600 transition-colors">
               <IoPersonOutline />
             </div>
+            <div className="text-lg cursor-pointer hover:text-pink-600 transition-colors">
+              <MdFavoriteBorder />
+            </div>
             <CartIcon />
-            <button className="lg:hidden text-2xl transition-all duration-300 z-50" onClick={toggleMenu}>
+            <button className="xl:hidden text-2xl transition-all duration-300 z-50" onClick={toggleMenu}>
               {isMenuOpen ? <IoClose /> : <IoMenu />}
             </button>
           </div>
         </div>
-      </Container>
+      </div>
 
       <div className="border-b border-gray-300" />
 
-      {/* Desktop Navigation Links */}
-      <div className="hidden lg:block">
-        <Container>
-          <div className="flex gap-6 justify-center m-4">
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600  font-bold underline" : "text-black"}`}
-              to="/allcategories"
-            >
-              All Products
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600  font-bold underline" : "text-black"}`}
-              to="/medicines"
-            >
-              Medicines
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
-              to="/vitamins"
-            >
-              Vitamins
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
-              to="/medicalequipment"
-            >
-              Medical Equipment
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
-              to="/firstaid"
-            >
-              First Aid
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
-              to="/personalcare"
-            >
-              Personal Care
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => `text-lg hover:text-blue-600 transition-colors ${isActive ? "text-blue-600 font-bold underline" : "text-black"}`}
-              to="/babycare"
-            >
-              Baby Care
-            </NavLink>
-          </div>
-        </Container>
-      </div>
-
       {/* Mobile Menu - Sliding Overlay */}
-      
 
       <div
         className={`fixed top-0 left-0 w-64 h-full bg-white shadow-xl z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
@@ -342,6 +336,8 @@ const Header = () => {
           </NavLink>
         </div>
       </div>
+
+
 
       {/* Overlay to close menu on click outside */}
       {isMenuOpen && (

@@ -27,7 +27,7 @@ function CartIcon() {
       onClick={handleClick}
       className="relative text-2xl cursor-pointer hover:text-blue-600 transition-colors"
     >
-      <GrCart className="w-6 h-6" />
+      <GrCart className="w-5 h-5" />
       {cartCount > 0 && (
         <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-[2px] rounded-full shadow-md">
           {cartCount}

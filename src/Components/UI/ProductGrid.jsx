@@ -3,8 +3,8 @@ import Card from './Card'; // adjust path if needed
 
 function ProductGrid({ data }) {
   return (
-    <div className="mx-auto justify-items-center">
-      <div className="justify-items-center sm:justify-items-stretch grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto">
+    <div className="container mx-auto px-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {data.map((item) => (
           <Card
             key={item.id}
@@ -15,6 +15,7 @@ function ProductGrid({ data }) {
             thumbnail={item.thumbnail}
             type={item.type}
             id={item.id}
+            className="w-full"
           />
         ))}
       </div>

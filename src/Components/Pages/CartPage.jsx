@@ -19,15 +19,35 @@ function CartPage() {
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // Remove item
+  // Remove entire item
   const handleRemove = (id) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
     updateCart(updatedCart);
   };
 
+  // Decrease quantity by one
+  const handleDecreaseQuantity = (id) => {
+    const updatedCart = cartItems.map((item) =>
+      item.id === id && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+    updateCart(updatedCart);
+  };
+
+  // Increase quantity by one
+  const handleIncreaseQuantity = (id) => {
+    const updatedCart = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    );
+    updateCart(updatedCart);
+  };
+
   // Calculate totals
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+  const totalPrice = cartItems
+    .reduce((sum, item) => sum + item.price * item.quantity, 0)
+    .toFixed(2);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -47,32 +67,71 @@ function CartPage() {
       ) : (
         <div className="space-y-6">
           {cartItems.map((item) => (
-            <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+            <div
+              key={item.id}
+              className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
+            >
               <div className="flex items-center gap-4">
-                <img src={item.thumbnail} alt={item.productTitle} className="w-16 h-16 object-contain rounded" />
+                <img
+                  src={item.thumbnail}
+                  alt={item.productTitle}
+                  className="w-16 h-16 object-contain rounded"
+                />
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-800">{item.productTitle}</h2>
-                  <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
-                  <p className="text-sm text-gray-500">Price: ${item.price.toFixed(2)}</p>
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    {item.productTitle}
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Quantity: {item.quantity}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Price: ${item.price.toFixed(2)}
+                  </p>
                 </div>
               </div>
-              <button
-                onClick={() => handleRemove(item.id)}
-                className="text-red-600 hover:text-red-800 transition"
-                title="Remove"
-              >
-                <FaTrashAlt />
-              </button>
+
+              <div className="flex items-center gap-2">
+                {/* Decrease Quantity */}
+                {item.quantity > 1 && (
+                  <button
+                    onClick={() => handleDecreaseQuantity(item.id)}
+                    className="text-yellow-600 hover:text-yellow-800 transition text-sm font-medium border border-yellow-600 px-2 py-1 rounded"
+                    title="Decrease Quantity"
+                  >
+                    −
+                  </button>
+                )}
+
+                {/* Increase Quantity */}
+                <button
+                  onClick={() => handleIncreaseQuantity(item.id)}
+                  className="text-green-600 hover:text-green-800 transition text-sm font-medium border border-green-600 px-2 py-1 rounded"
+                  title="Increase Quantity"
+                >
+                  +
+                </button>
+
+                {/* Remove Item */}
+                <button
+                  onClick={() => handleRemove(item.id)}
+                  className="text-red-600 hover:text-red-800 transition"
+                  title="Remove All"
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
             </div>
           ))}
 
           {/* Totals */}
           <div className="flex justify-between items-center mt-8 border-t pt-4">
             <div className="text-lg font-medium text-gray-700">
-              Total Items: <span className="text-blue-600 font-bold">{totalQuantity}</span>
+              Total Items:{" "}
+              <span className="text-blue-600 font-bold">{totalQuantity}</span>
             </div>
             <div className="text-lg font-medium text-gray-700">
-              Total Price: <span className="text-blue-600 font-bold">${totalPrice}</span>
+              Total Price:{" "}
+              <span className="text-blue-600 font-bold">${totalPrice}</span>
             </div>
           </div>
 
