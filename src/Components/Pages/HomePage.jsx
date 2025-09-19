@@ -14,6 +14,9 @@ import { TbActivityHeartbeat } from "react-icons/tb";
 import { PiBabyLight } from "react-icons/pi";
 import { LuUpload } from "react-icons/lu";
 import { MdOutlinePhotoCamera } from "react-icons/md";
+import useFetchData from "../../utils/UseFetchData";
+import ProductGrid from "../UI/ProductGrid";
+import { FaArrowRight } from "react-icons/fa";
 import {
   IoCloudUploadOutline,
   IoCalendarOutline,
@@ -21,67 +24,27 @@ import {
 } from "react-icons/io5";
 
 function HomePage() {
+  const allData = useFetchData("/all");
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+  useEffect(() => {
+    if (!Array.isArray(allData)) return;
+
+    // 🧠 Shuffle and pick 5 random items
+    const shuffled = [...allData].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 5);
+
+    setFeaturedProducts(selected);
+  }, [allData]);
+
   return (
     <div>
       <div className="bg-blue-50 border-t border-gray-300 ">
-        <Container className="py-13">
-          {/* <div className="flex gap-15 justify-center ">
-            <div className="flex flex-col justify-center ">
-              <h1 className="text-5xl font-bold mb-4">
-                Your Health, <span className="text-blue-600">Our Priority</span>
-              </h1>
-              <span className="text-xs text-gray-500">
-                Get authentic medicines, health supplements, and medical
-                equipment delivered to your doorstep. Licensed pharmacy with
-                24/7 support.
-              </span>
-              <div className="flex gap-3 mt-6">
-                <Button filled text={"Shop Now"} url={"/allcategories"} />
-                <Button
-                  filled={false}
-                  text={"Find Medicines"}
-                  url={"/medicines"}
-                />
-              </div>
+        <div className="py-13 container mx-auto px-4 sm:px-6 lg:px-8 ">
 
-              <div className="flex gap-7 mt-7">
-                <div className="text-center ">
-                  <h1 className=" text-blue-600 font-bold text-lg">10K+</h1>
-                  <span className="text-xs text-gray-500">Happy Customers</span>
-                </div>
-                <div className="text-center ">
-                  <h1 className=" text-green-500 font-bold text-lg">5000+</h1>
-                  <span className="text-xs text-gray-500">Products</span>
-                </div>
-                <div className="text-center ">
-                  <h1 className=" text-purple-600 font-bold text-lg">24/7</h1>
-                  <span className="text-xs text-gray-500">Support</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative w-fit">
-              <img
-                src="/doctor1.jpg"
-                alt="doctor-photo"
-                className="rounded-2xl h-110 object-center shadow-2xl"
-              />
-
-              <div className="flex items-center gap-3 absolute -bottom-4 -left-5 bg-white  text-blue-600 text-sm font-medium px-4 py-2 rounded-lg shadow-2xl">
-                <RiSecurePaymentLine className="text-green-500 text-2xl bg-green-100 p-2 rounded-full w-10 h-10 flex items-center justify-center" />
-                <div className="flex flex-col">
-                  <span className="text-xm text-green-500">FDA Approved</span>
-                  <span className="text-xs text-gray-500 font-normal">
-                    All medicines verified
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-          <div className="flex flex-col lg:flex-row items-center gap-12 px-0 lg:px-6 ">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-12 px-0 lg:px-6 ">
             {/* Left: Description */}
-            <div className="flex flex-col justify-center text-center lg:text-left max-w-xl">
+            <div className="flex flex-col justify-center text-center lg:text-left max-w-2xl">
               <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-4">
                 Your Health, <span className="text-blue-600">Our Priority</span>
               </h1>
@@ -178,11 +141,11 @@ function HomePage() {
               </span>
             </div>
           </div>
-        </Container>
+        </div>
       </div>
 
       <div className="mt-11">
-        <Container>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold mb-4 text-center">
             Shop by Category
           </h1>
@@ -270,34 +233,43 @@ function HomePage() {
               </span>
             </div>
           </div>
-        </Container>
+        </div>
       </div>
 
       <div className="mt-10 mb-10">
-        <Container>
-          <div className="flex justify-between items-center ">
-            <div>
-              <h1 className="text-3xl font-bold mb-4">Featured Products</h1>
-              <p className="text-xs text-gray-500 font-normal mt-2 mx-auto max-w-lg">
-                Discover our most popular and trusted medical products, chosen
-                by thousands of customers
-              </p>
-            </div>
-            <div>
-              <Button
-                filled={false}
-                text={"View All Products"}
-                url={"/allcategories"}
-              />
-            </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold mb-5 text-center">Featured Products</h1>
+          <div>
+            <p className="text-xs text-gray-500 font-normal mx-auto max-w-lg items-center">
+              Discover our most popular and trusted medical products, chosen
+              by thousands of customers
+            </p>
           </div>
-        </Container>
+          <div className="flex justify-center mt-3 lg:justify-end">
+            <Button
+              filled={false}
+              url="/allcategories"
+              text={
+                <span className="flex items-center gap-2">
+                  View All Products <FaArrowRight className="text-sm " />
+                </span>
+              }
+            />
+          </div>
+          <div className="mt-4 p-0">
+            {featuredProducts.length === 0 ? (
+              <p className="text-gray-600 text-center">Loading featured items...</p>
+            ) : (
+              <ProductGrid data={featuredProducts} />
+            )}
+          </div>
+        </div>
       </div>
 
-      <div className="mt-9 mb-11 text-center">
-        <div className="mx-auto  max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mt-15 mb-11 text-center">
+        <div className="mx-auto container px-4 sm:px-1 lg:px-4">
           <h1 className="text-3xl font-bold mb-5">Online Prescriptions</h1>
-          
+
           <div className="sm:p-8 lg:p-5">
             <div className="mx-auto bg-white rounded-xl shadow-lg px-6 pb-3 sm:px-8  sm:pb-4 lg:px-10 lg:pb-5">
               {/* Header Section */}

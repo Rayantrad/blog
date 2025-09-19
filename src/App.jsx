@@ -11,11 +11,11 @@ import BabyCarePage from "./Components/Pages/BabyCarePage";
 import AuthLayout from "./Components/Layouts/AuthLayout";
 import Login from './Components/Pages/Login';
 import SignUp from './Components/Pages/SignUp';
-import AllCategories from "./Components/Pages/AllCategories";
 import ProductDetailPage from "./Components/Pages/ProductDetailPage";
 import CartPage from "./Components/Pages/CartPage";
 import CheckOutPage from "./Components/Pages/CheckOutPage";
-
+import AllCategories from "./Components/Pages/AllCategories";
+import FavouriteproductsPage from "./Components/Pages/FavouriteproductsPage";
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
       { path: "/:type/:id", element: <ProductDetailPage /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/checkout", element: <CheckOutPage /> },
+      { path: "/favourites", element:<FavouriteproductsPage />},
     ],
   },
   // {

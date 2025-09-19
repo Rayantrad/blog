@@ -4,7 +4,7 @@ import SortController from './../UI/SortController';
 
 function Section({ title, onSearch, onSortedData, data }) {
   return (
-    <section className="container mx-auto px-4 sm:px-8 mt-10">
+    <section className="container mx-auto px-4  sm:px-2 lg:px-4 xl:px-0 mt-10">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
         {/* Title */}
         <h1 className="text-3xl sm:text-4xl font-serif font-semibold text-blue-800 tracking-wide text-center md:text-left">

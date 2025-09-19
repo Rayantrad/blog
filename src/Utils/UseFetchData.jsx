@@ -1,6 +1,6 @@
-// useFetchData.js
+useFetchData.js
 import { useState, useEffect } from 'react';
-import api from './api';
+import api from '../utils/api';
 
 function useFetchData(endpoint) {
   const [data, setData] = useState([]);

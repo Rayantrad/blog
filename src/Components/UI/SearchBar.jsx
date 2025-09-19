@@ -4,13 +4,13 @@ import { FiSearch } from 'react-icons/fi'; // Feather icon
 function SearchBar({ onSearch }) {
   const handleChange = (e) => {
     const value = e.target.value;
-    if (onSearch) {
+    if (onSearch) {4
       onSearch(value);
     }
   };
 
   return (
-<div className="flex justify-center px-4">
+<div className="flex justify-center ">
   <div className="relative w-full max-w-xl">
     <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-600 text-xl" />
     <input

@@ -302,7 +302,7 @@ function Footer() {
 
       {/* Main Footer Content */}
       <div className="bg-gray-900 text-gray-400">
-        <Container>
+        <div className='container mx-auto px-4  sm:px-2 lg:px-4 xl:px-0'>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8">
             {/* Logo and Contact Info Section - Collapsible */}
             <div className="lg:block">
@@ -419,11 +419,11 @@ function Footer() {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
         <div className="border-t border-gray-700" />
 
         {/* Bottom Section */}
-        <Container>
+        <div className='container mx-auto px-4  sm:px-2 lg:px-4 xl:px-0'>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 sm:px-6 py-5">
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
               <div className="flex gap-2 items-center">
@@ -445,13 +445,13 @@ function Footer() {
               </span>
             </div>
           </div>
-        </Container>
+        </div>
         <div className="border-t border-gray-700" />
-        <Container>
+        <div>
           <div className="flex justify-center py-2 text-center">
             <span className="text-xs ">© Rayan Trad CarePharma 2025</span>
           </div>
-        </Container>
+        </div>
       </div>
     </div>
   );
