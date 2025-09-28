@@ -5,11 +5,19 @@ import useFetchData from "../../utils/UseFetchData";
 import AddToCartPanel from "../UI/AddToCartPanel";
 import FavoriteButton from "../UI/FavouriteButton";
 
+import { useEffect } from "react";
+
+
 function ProductDetailPage() {
   const { type, id } = useParams();
   const navigate = useNavigate();
   const products = useFetchData(`/${type}`);
   const product = products.find((item) => item.id === parseInt(id));
+
+  
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
   if (!product) {
     return (
@@ -19,7 +27,7 @@ function ProductDetailPage() {
     );
   }
 
-  // 💰 Discount Logic
+  //  Discount Logic
   const discountKey = `pharmaDiscount-${product.id}`;
   const stored = JSON.parse(localStorage.getItem(discountKey));
 
@@ -50,7 +58,7 @@ function ProductDetailPage() {
       <div className="bg-white p-6 md:p-10 rounded-lg shadow-xl flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Image Section */}
         <div className="lg:w-1/2 relative flex justify-center items-center p-4 bg-gradient-to-b from-blue-50 to-white rounded-lg">
-          {/* ❤️ Favorite Icon */}
+          {/*  Favorite Icon */}
           <FavoriteButton product={product} className="absolute top-2 left-2 z-10 w-10 h-10" />
 
           <img
@@ -67,7 +75,7 @@ function ProductDetailPage() {
 
             <p className="text-lg text-gray-600 mb-2">{product.brand}</p>
 
-            {/* 💸 Price with Discount */}
+            {/*  Price with Discount */}
             <div className="flex items-center gap-3 mb-4">
               <span className="text-sm text-gray-400 line-through">${product.priceInDollar}</span>
               <span className="text-2xl font-bold text-blue-600">${discountedPrice}</span>

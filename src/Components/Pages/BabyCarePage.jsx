@@ -5,8 +5,12 @@ import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 import Section from './../Layouts/Section';
 import useSortedData from '../UI/useSortedData';
-
+import { useEffect } from 'react';
 function BabyCarePage() {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const babycare = useFetchData('/babycare');
   const [searchTerm, setSearchTerm] = useState("");

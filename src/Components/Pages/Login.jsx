@@ -1,79 +1,93 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { UserContext } from "../../Contexts/UserContext";
+import { NavLink, useNavigate, useLocation } from "react-router";
 
 function Login() {
-  const { login, loginError, loading } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const { login, loginError, loading, isAuth } = useContext(UserContext);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (email && password) {
-      login(email, password);
-      setEmailError("");
-      setPasswordError("");
-    } else if (email && !password) {
-      setPasswordError("Password is required!");
-      setEmailError("");
-    } else if (!email && password) {
-      setEmailError("Email is required!");
-      setPasswordError("");
-    } else {
-      setEmailError("Email is required!");
-      setPasswordError("Password is required!");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/allcategories"; // fallback route
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
     }
+  }, [isAuth]);
+
+  function onSubmit(data) {
+    login(data.email, data.password);
   }
 
   return (
-    <div className="text-white border rounded px-2 py-3">
-      <h3 className="text-center text-lg">Login</h3>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          className={`border rounded my-1 p-1 ${
-            emailError && "border-red-400"
-          }`}
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          className={`border rounded my-1 p-1 ${
-            passwordError && "border-red-400"
-          }`}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {loginError && (
-          <span className="bg-red-300 text-white px-2 py-1 rounded text-center">
-            {loginError}
-          </span>
-        )}
-        {emailError && (
-          <span className="bg-red-300 text-white px-2 py-1 rounded text-center">
-            {emailError}
-          </span>
-        )}
-        {passwordError && (
-          <span className="bg-red-300 text-white px-2 py-1 rounded text-center">
-            {passwordError}
-          </span>
-        )}
-        <button
-          disabled={loading}
-          className={`${
-            loading ? "bg-gray-300 text-white" : "bg-white text-black "
-          } px-3 py-1 rounded mt-3`}
-        >
-          {loading ? "Loading" : "Login"}
-        </button>
-      </form>
+    <div className="flex flex-col items-center gap-5 px-4 sm:px-6 md:px-8 lg:px-10">
+      <div>
+        <h1 className="text-center text-2xl sm:text-3xl md:text-4xl pb-6 font-bold text-blue-900 leading-snug">
+          Welcome back to CarePharma <br />
+          <span className="text-blue-600">Login to continue your journey</span>
+        </h1>
+      </div>
+
+      <div className="border rounded-lg shadow-md px-4 py-6 w-full max-w-md bg-white">
+        <h3 className="text-center text-xl font-semibold text-blue-700 mb-4">Login</h3>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+            <input
+              className={`border rounded w-full mt-1 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${errors.email ? "border-red-400" : ""
+                }`}
+              type="email"
+              id="email"
+              {...register("email", { required: "Email is required!" })}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="password" className="text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              id="password"
+              className={`border rounded w-full mt-1 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${errors.password ? "border-red-400" : ""
+                }`}
+              {...register("password", { required: "Password is required!" })}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+            )}
+          </div>
+
+          {loginError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-sm text-center">
+              {loginError}
+            </div>
+          )}
+
+          <button
+            disabled={loading}
+            className="bg-blue-600 hover:bg-blue-700 text-white
+             px-4 py-2 rounded font-medium transition mt-2 cursor-pointer"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+
+      <div className="text-sm text-gray-700">
+        Don’t have an account?{" "}
+        <NavLink to="/signup" className="text-blue-600 hover:underline font-medium">
+          Sign up here
+        </NavLink>
+      </div>
     </div>
   );
 }

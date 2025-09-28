@@ -12,7 +12,12 @@ function AllCategories() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
 
-  // 🧠 Filter by category and search term
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+
+  //  Filter by category and search term
   useEffect(() => {
     if (!Array.isArray(allData)) return;
 
@@ -31,7 +36,7 @@ function AllCategories() {
     setFilteredProducts(filtered);
   }, [allData, selectedType, searchTerm]);
 
-  // ✅ Memoized callback to avoid re-renders
+  //  Memoized callback to avoid re-renders
   const handleSortedChange = useCallback((sorted) => {
     setSortedProducts(sorted);
   }, []);
@@ -42,19 +47,19 @@ function AllCategories() {
 
       <main className="container mx-auto px-4 py-8">
         <header className="mb-6">
-          <h1 className="text-3xl font-bold text-blue-700">
+          <h1 className="text-3xl font-bold text-blue-700 md:text-left text-center">
             Explore All Products
           </h1>
         </header>
 
-        {/* 🔧 Controls Panel */}
+        {/*  Controls Panel */}
         <section className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
-          {/* 🔍 Search Bar — left-aligned and wider */}
+          {/*  Search Bar — left-aligned and wider */}
           <div className="w-full md:w-[440px]">
             <SearchBar onSearch={setSearchTerm} />
           </div>
 
-          {/* 🗂️ Category Filter — compact */}
+          {/*  Category Filter — compact */}
           <div className="w-full md:w-[220px]">
             <select
               value={selectedType}
@@ -71,13 +76,13 @@ function AllCategories() {
             </select>
           </div>
 
-          {/* ↕️ Sort Controller — compact */}
+          {/*  Sort Controller — compact */}
           <div className="w-full md:w-[220px]">
             <SortController data={filteredProducts} onChange={handleSortedChange} />
           </div>
         </section>
 
-        {/* 🧩 Product Grid */}
+        {/*  Product Grid */}
         <section>
           {sortedProducts.length === 0 ? (
             <p className="text-gray-600 text-center text-lg">

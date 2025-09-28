@@ -5,12 +5,16 @@ import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 import useSortedData from '../UI/useSortedData';
 import Section from './../Layouts/Section'; 
+import { useEffect } from 'react';  
 
 function VitaminsPage() {
   const vitamins = useFetchData('/vitamins');
   const [searchTerm, setSearchTerm] = useState("");
   const [sortedData, setSortedData] = useSortedData(vitamins);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className="bg-gray-50 mb-10">
       <HeroSection />

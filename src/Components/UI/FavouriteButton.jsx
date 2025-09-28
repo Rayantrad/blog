@@ -27,14 +27,14 @@ function FavoriteButton({ product ,className }) {
     localStorage.setItem("pharmaFavorites", JSON.stringify(updatedFavorites));
     setIsFavorited(!isFavorited);
 
-    // 🔁 Notify other components like FavouriteproductsPage
+    //  Notify other components like FavouriteproductsPage
     window.dispatchEvent(new Event("favoritesUpdated"));
   };
 
   return (
     <button
       onClick={toggleFavorite}
-      className={`absolute top-2 left-2 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-red-200 transition-colors duration-300 ${className}`}
+      className={`absolute top-2 left-2 z-10 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer bg-white shadow-md hover:bg-red-200 transition-colors duration-300 ${className}`}
       aria-label="Toggle Favorite"
     >
       {isFavorited ? (

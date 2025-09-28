@@ -6,6 +6,11 @@ function CartPage() {
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
+  
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
   // Load cart from localStorage
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("pharmaCart")) || [];
@@ -51,16 +56,18 @@ function CartPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-blue-700 mb-4">Your Cart</h1>
 
       {/* Go Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-white hover:bg-blue-600 border border-blue-600 px-4 py-2 rounded-full transition-all duration-300"
+        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-white cursor-pointer hover:bg-blue-600 border border-blue-600 px-4 py-2 rounded-full transition-all duration-300"
       >
-        <FaArrowLeft className="text-xs" />
+        <FaArrowLeft className="text-xs " />
         Go Back
       </button>
+      <h1 className="text-3xl font-bold text-blue-700 mb-4 md:text-left text-center">Your Cart</h1>
+
+      
 
       {cartItems.length === 0 ? (
         <p className="text-gray-600 text-center text-lg">Your cart is empty.</p>
@@ -95,7 +102,7 @@ function CartPage() {
                 {item.quantity > 1 && (
                   <button
                     onClick={() => handleDecreaseQuantity(item.id)}
-                    className="text-yellow-600 hover:text-yellow-800 transition text-sm font-medium border border-yellow-600 px-2 py-1 rounded"
+                    className="text-yellow-600 cursor-pointer hover:text-yellow-800 transition text-sm font-medium border border-yellow-600 px-2 py-1 rounded"
                     title="Decrease Quantity"
                   >
                     −
@@ -105,7 +112,7 @@ function CartPage() {
                 {/* Increase Quantity */}
                 <button
                   onClick={() => handleIncreaseQuantity(item.id)}
-                  className="text-green-600 hover:text-green-800 transition text-sm font-medium border border-green-600 px-2 py-1 rounded"
+                  className="text-green-600 cursor-pointer hover:text-green-800 transition text-sm font-medium border border-green-600 px-2 py-1 rounded"
                   title="Increase Quantity"
                 >
                   +
@@ -114,7 +121,7 @@ function CartPage() {
                 {/* Remove Item */}
                 <button
                   onClick={() => handleRemove(item.id)}
-                  className="text-red-600 hover:text-red-800 transition"
+                  className="text-red-600 cursor-pointer hover:text-red-800 transition"
                   title="Remove All"
                 >
                   <FaTrashAlt />
@@ -139,7 +146,7 @@ function CartPage() {
           <div className="flex justify-end mt-6">
             <button
               onClick={() => navigate("/checkout")}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+              className="bg-blue-600 cursor-pointer text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
             >
               Proceed to Checkout
             </button>

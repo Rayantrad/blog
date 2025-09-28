@@ -6,9 +6,12 @@ import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 import Section from './../Layouts/Section';
 import useSortedData from '../UI/useSortedData';
-
+import { useEffect } from 'react';
 function PersonalPage() {
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const personalcare = useFetchData('/personalcare');
   const [searchTerm, setSearchTerm] = useState("");
   const [sortedData, setSortedData] = useSortedData(personalcare); 

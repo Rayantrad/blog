@@ -5,9 +5,12 @@ import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 import useSortedData from '../UI/useSortedData';
 import Section from './../Layouts/Section';
-
+import { useEffect } from 'react';
 function FirstAidPage() {
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const firstaid = useFetchData('/firstaid');
   const [searchTerm, setSearchTerm] = useState("");
   const [sortedData, setSortedData] = useSortedData(firstaid);

@@ -40,7 +40,7 @@ function AddToCartPanel({ product }) {
   }
 
   localStorage.setItem("pharmaCart", JSON.stringify(cart));
-  window.dispatchEvent(new Event("cartUpdated")); // 👈 Notify others
+  window.dispatchEvent(new Event("cartUpdated")); //  Notify others
 
   setCurrentStock((prev) => prev - quantity);
   setQuantity(1);
@@ -62,7 +62,7 @@ function AddToCartPanel({ product }) {
         <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
           <button
             onClick={decreaseQuantity}
-            className="p-3 w-10 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
+            className="p-3 w-10 text-gray-600 hover:bg-gray-100 disabled:opacity-50 cursor-pointer"
             disabled={quantity <= 1}
           >
             <FaMinus />
@@ -70,7 +70,7 @@ function AddToCartPanel({ product }) {
           <span className="p-3 w-10 text-center text-lg font-medium">{quantity}</span>
           <button
             onClick={increaseQuantity}
-            className="p-3 w-10 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
+            className="p-3 w-10 text-gray-600 hover:bg-gray-100 disabled:opacity-50 cursor-pointer"
             disabled={quantity >= currentStock}
           >
             <FaPlus />
@@ -80,7 +80,7 @@ function AddToCartPanel({ product }) {
         {/* Add to Cart */}
         <button
           onClick={handleAddToCart}
-          className={`flex-1 py-3 px-6 font-semibold rounded-lg shadow-md transition ${
+          className={`flex-1 py-3 px-6 font-semibold rounded-lg shadow-md transition cursor-pointer ${
             currentStock <= 0
               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
               : "bg-blue-600 text-white hover:bg-blue-700"

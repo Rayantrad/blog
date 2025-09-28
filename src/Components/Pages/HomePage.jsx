@@ -17,6 +17,9 @@ import { MdOutlinePhotoCamera } from "react-icons/md";
 import useFetchData from "../../utils/UseFetchData";
 import ProductGrid from "../UI/ProductGrid";
 import { FaArrowRight } from "react-icons/fa";
+import { NavLink, useNavigate } from 'react-router';
+
+
 import {
   IoCloudUploadOutline,
   IoCalendarOutline,
@@ -24,13 +27,19 @@ import {
 } from "react-icons/io5";
 
 function HomePage() {
+
+  
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
   const allData = useFetchData("/all");
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
   useEffect(() => {
     if (!Array.isArray(allData)) return;
 
-    // 🧠 Shuffle and pick 5 random items
+    //  Shuffle and pick 5 random items
     const shuffled = [...allData].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 5);
 
@@ -159,7 +168,9 @@ function HomePage() {
               <div className="bg-blue-200 p-2 rounded-full w-10 h-10 flex items-center text-center justify-center mb-5">
                 <GiMedicines className="text-blue-500 text-2xl " />
               </div>
-              <h1>Medicines</h1>
+              <NavLink to="/medicines">
+                <h1>Medicines</h1>
+              </NavLink>
               <span className="text-xs text-gray-500 font-normal mt-5">
                 Prescription & OTC medicines
               </span>
@@ -172,7 +183,9 @@ function HomePage() {
               <div className="bg-red-200 p-2 rounded-full w-10 h-10 flex items-center text-center justify-center mb-5">
                 <FaRegHeart className="text-red-600 text-2xl " />
               </div>
-              <h1>Vitamins & Supplements</h1>
+              <NavLink to="/vitamins">
+                <h1>Vitamins & Supplements</h1>
+              </NavLink>
               <span className="text-xs text-gray-500 font-normal mt-5">
                 Health & wellness supplements
               </span>
@@ -185,7 +198,9 @@ function HomePage() {
               <div className="bg-green-200 p-2 rounded-full w-10 h-10 flex items-center text-center justify-center mb-5">
                 <FaStethoscope className="text-green-600 text-2xl " />
               </div>
-              <h1>Medical Equipment</h1>
+              <NavLink to="/medicalequipment">
+                <h1>Medical Equipment</h1>
+              </NavLink>
               <span className="text-xs text-gray-500 font-normal mt-5">
                 Professional medical devices
               </span>
@@ -198,7 +213,9 @@ function HomePage() {
               <div className="bg-orange-100 p-2 rounded-full w-10 h-10 flex items-center text-center justify-center mb-5">
                 <BsBandaid className="text-orange-500 text-2xl " />
               </div>
-              <h1>First Aid</h1>
+              <NavLink to="/firstaid">
+                <h1>First Aid</h1>
+              </NavLink>
               <span className="text-xs text-gray-500 font-normal mt-5">
                 Emergency & wound care
               </span>
@@ -211,7 +228,9 @@ function HomePage() {
               <div className="bg-purple-200 p-2 rounded-full w-10 h-10 flex items-center text-center justify-center mb-5">
                 <TbActivityHeartbeat className="text-purple-500 text-2xl " />
               </div>
-              <h1>Personal Care</h1>
+              <NavLink to="/personalcare">
+                <h1>Personal Care</h1>
+              </NavLink>
               <span className="text-xs text-gray-500 font-normal mt-5">
                 Daily health & hygiene
               </span>
@@ -224,7 +243,9 @@ function HomePage() {
               <div className="bg-pink-100 p-2 rounded-full w-10 h-10 flex items-center text-center justify-center mb-5">
                 <PiBabyLight className="text-pink-600 text-2xl " />
               </div>
-              <h1>Baby Care</h1>
+              <NavLink to="/babycare">
+                <h1>Baby Care</h1>
+              </NavLink>
               <span className="text-xs text-gray-500 font-normal mt-5">
                 Infant health products
               </span>

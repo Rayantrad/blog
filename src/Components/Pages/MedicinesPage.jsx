@@ -5,11 +5,14 @@ import SearchableProductGrid from './../UI/SearchableProductGrid';
 import { useState } from 'react';
 import Section from './../Layouts/Section';
 import useSortedData from '../UI/useSortedData';
-
+import { useEffect } from 'react';
 function MedicinesPage() {
   const medicines = useFetchData('/medicines');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortedData, setSortedData] = useSortedData(medicines);
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
 
 
